@@ -72,6 +72,8 @@ const adminPanel = document.getElementById("adminPanel");
 
 const clearChatButton = document.getElementById("clearChatButton");
 
+const loginLink = document.getElementById("loginLink");
+const signupLink = document.getElementById("signupLink");
 
 
 // =====================
