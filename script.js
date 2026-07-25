@@ -270,7 +270,7 @@ function convertCommands(text) {
     return result.trim();
 
 }
-alert("before messages");
+
 // =====================
 // LOAD MESSAGES
 // =====================
@@ -281,7 +281,7 @@ ref(database,"messages"),
 
 (snapshot)=>{
 
-alert("messages loaded");
+
     messagesBox.innerHTML = "";
 
 
