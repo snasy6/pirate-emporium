@@ -1,4 +1,4 @@
-
+alert("script.js loaded");
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
@@ -270,6 +270,7 @@ function convertCommands(text) {
     return result.trim();
 
 }
+alert("before messages");
 // =====================
 // LOAD MESSAGES
 // =====================
@@ -280,7 +281,7 @@ ref(database,"messages"),
 
 (snapshot)=>{
 
-
+alert("messages loaded");
     messagesBox.innerHTML = "";
 
 
