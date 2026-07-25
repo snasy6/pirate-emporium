@@ -227,7 +227,49 @@ postButton.onclick = async()=>{
 
 
 
+// =====================
+// EMOTE COMMANDS
+// =====================
 
+const emotes = {
+
+    pirate: "pirate.gif",
+
+    mad: "my_fucking_crew.jpg"
+
+};
+
+function convertCommands(text) {
+
+    const words = text.split(" ");
+
+    let result = "";
+
+    for (let i = 0; i < words.length; i++) {
+
+        if (words[i] === "/emote" && i + 1 < words.length) {
+
+            const name = words[i + 1];
+
+            if (emotes[name]) {
+
+                result += `<img class="emote" src="${emotes[name]}" alt="${name}"> `;
+
+                i++;
+
+                continue;
+
+            }
+
+        }
+
+        result += words[i] + " ";
+
+    }
+
+    return result.trim();
+
+}
 // =====================
 // LOAD MESSAGES
 // =====================
