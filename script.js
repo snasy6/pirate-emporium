@@ -348,7 +348,7 @@ ref(database,"messages"),
 
         <b>🏴‍☠️ ${post.username}</b>
 
-        <p>${post.message}</p>
+        <p>${convertCommands(post.message)}</p>
 
 
         <small>
