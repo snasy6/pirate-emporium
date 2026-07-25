@@ -97,7 +97,6 @@ onAuthStateChanged(auth, async(user)=>{
 
     if(!user){
 
-
         currentUser = null;
 
         username = "";
@@ -106,8 +105,15 @@ onAuthStateChanged(auth, async(user)=>{
 
 
         welcome.innerHTML = "⚠️ Please login";
-
+    
         postButton.disabled = true;
+        
+
+        logoutButton.style.display = "none";
+
+        if(loginLink) loginLink.style.display = "inline";
+
+        if(signupLink) signupLink.style.display = "inline";
 
 
         return;
