@@ -1,16 +1,10 @@
 // 🏴‍☠️ Bances Pirate Emporium Emotes
 // Add your own below!
 // Format:
-// ":shortcut:" : "filename.extension"
+// /emote example : url
 
 
-window.emotes = {
-
-
-    ":captin_angry:": "my_fucking_crew.jpg",
-
-
-    ":pirate:": "pirate.gif"
-
-
+const emotes = {
+    pirate: "https://your-server.com/emotes/pirate.gif",
+    mad: "https://your-server.com/emotes/my_fucking_crew.jpg"
 };
