@@ -123,7 +123,11 @@ onAuthStateChanged(auth, async(user)=>{
 
 
     currentUser = user;
+    logoutButton.style.display = "inline";
 
+    if(loginLink) loginLink.style.display = "none";
+
+    if(signupLink) signupLink.style.display = "none";
 
 
     const userSnap = await get(
