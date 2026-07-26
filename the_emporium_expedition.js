@@ -10,12 +10,17 @@ let game = JSON.parse(
 
     crew: 5,
 
+    ship: {
+        name: "Rusty Sloop",
+        level: 1,
+        bonus: 1
+    },
+
     expedition: null,
 
     loot: []
 
 };
-
 
 
 // SAVE
