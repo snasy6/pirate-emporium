@@ -1,14 +1,58 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
 
-<title>
-🏴‍☠️ The Emporium Expedition
-</title>
+<title>🏴‍☠️ The Emporium Expedition</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+
+body{
+    background:#111;
+    color:white;
+    font-family:Arial, sans-serif;
+    text-align:center;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:15px;
+    padding:20px;
+}
+
+.box{
+    background:#222;
+    border:2px solid #8b6b2f;
+    border-radius:10px;
+    padding:15px;
+}
+
+button{
+    background:#8b6b2f;
+    color:white;
+    border:none;
+    padding:8px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#c49a45;
+}
+
+.crewMember{
+    border:1px solid #555;
+    margin:10px;
+    padding:10px;
+    border-radius:8px;
+}
+
+h1{
+    color:#d4af37;
+}
+
+</style>
 
 </head>
 
@@ -16,124 +60,64 @@
 <body>
 
 
-<h1>
-🏴‍☠️ The Emporium Expedition 🏴‍☠️
-</h1>
-
-<h3>
-⚠️ Development Build
-</h3>
+<h1>🏴‍☠️ The Emporium Expedition</h1>
 
 
+<div class="container">
+
+
+<div class="box">
+
+<h2>Stats</h2>
 
 <div id="stats">
 
-Loading stats...
+Loading...
+
+</div>
 
 </div>
 
 
 
-<hr>
+<div class="box">
 
-
-
-<h2>
-🚢 Ship
-</h2>
+<h2>Ship</h2>
 
 <div id="ship">
 
-Loading ship...
+Loading...
 
 </div>
 
 
 <br>
 
-
 <button id="renameShip">
-🏷️ Rename Ship
+
+Rename Ship
+
 </button>
+
+
+<br><br>
 
 
 <button id="upgradeShip">
-🔨 Upgrade Ship
-</button>
 
-
-
-<hr>
-
-
-
-<h2>
-👥 Crew
-</h2>
-
-<div id="crew">
-
-Loading crew...
-
-</div>
-
-
-
-<hr>
-
-
-
-<h2>
-🎒 Inventory
-</h2>
-
-<div id="inventory">
-
-Loading inventory...
-
-</div>
-
-
-
-<hr>
-
-
-
-<h2>
-🏝️ Market
-</h2>
-
-<div id="market">
-
-Loading market...
-
-</div>
-
-
-
-<hr>
-
-
-
-<h2>
-🏝️ Island
-</h2>
-
-<button id="mainIsland">
-
-🏝️ Go To Main Island
+Upgrade Ship
 
 </button>
 
 
-
-<hr>
-
+</div>
 
 
-<h2>
-⚓ Active Expedition
-</h2>
+
+
+<div class="box">
+
+<h2>Mission</h2>
 
 <div id="mission">
 
@@ -142,44 +126,95 @@ No expedition active
 </div>
 
 
-
 <br>
-
-
 
 <button id="sendCrew">
 
-🚢 Send Crew On Expedition
+Send Crew
 
 </button>
 
-
-
-<hr>
-
-
-
-<h2>
-💰 Treasure Hold
-</h2>
-
-<div id="loot">
-
-No treasure found...
 
 </div>
 
 
 
-<br><br>
+
+<div class="box">
+
+<h2>🏴‍☠️ Crew</h2>
+
+<div id="crew">
+
+Loading...
+
+</div>
+
+</div>
 
 
-<a href="index.html">
 
-⬅ Return To Emporium
 
-</a>
+<div class="box">
 
+<h2>🎒 Inventory</h2>
+
+<div id="inventory">
+
+Loading...
+
+</div>
+
+</div>
+
+
+
+
+<div class="box">
+
+<h2>🏝️ Island Market</h2>
+
+<div id="market">
+
+Loading...
+
+</div>
+
+</div>
+
+
+
+
+<div class="box">
+
+<h2>🏝️ Rest</h2>
+
+<button id="mainIsland">
+
+Rest Crew
+
+</button>
+
+</div>
+
+
+
+
+<div class="box">
+
+<h2>💰 Loot Log</h2>
+
+<div id="loot">
+
+No treasure yet
+
+</div>
+
+</div>
+
+
+
+</div>
 
 
 <script src="the_emporium_expedition.js"></script>
