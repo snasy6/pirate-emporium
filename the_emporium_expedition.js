@@ -583,7 +583,7 @@ return "☠️ Furious";
 
 function updateGame(){
 
-
+if(!document.getElementById("stats")) return;
 
 document.getElementById("stats").innerHTML = `
 
