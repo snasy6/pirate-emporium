@@ -607,11 +607,11 @@ game.crew.map(pirate => `
 <br><br>
 
 
-${getMood(pirate.morale)}
+${getMood(pirate.morale ?? 100)}
 
 <br>
 
-❤️ Morale: ${pirate.morale}/100
+❤️ Morale: ${pirate.morale ?? 100}/100
 
 
 </div>
@@ -845,9 +845,14 @@ return;
 
 
 game.crew.forEach(pirate=>{
+ if(pirate.morale == null){
+
+        pirate.morale = 100;
+
+    }
 
 
-pirate.morale -= 10;
+pirate.morale -= 2;
 
 
 
