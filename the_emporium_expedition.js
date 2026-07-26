@@ -11,6 +11,7 @@ function randomFrom(array){
 }
 
 
+
 // =====================
 // PIRATE GENERATOR
 // =====================
@@ -53,22 +54,37 @@ function generatePirate(){
 
     return {
 
+
         name:
+
         randomFrom(firstNames)
+
         + " "
+
         + randomFrom(lastNames),
 
 
+
         combat:
+
         Math.floor(Math.random()*10)+1,
+
 
 
         luck:
+
         Math.floor(Math.random()*10)+1,
 
 
+
         navigation:
-        Math.floor(Math.random()*10)+1
+
+        Math.floor(Math.random()*10)+1,
+
+
+
+        morale:100
+
 
     };
 
@@ -79,19 +95,29 @@ function generatePirate(){
 
 function generateCrew(amount){
 
+
     let crew = [];
 
 
     for(let i = 0; i < amount; i++){
 
-        crew.push(generatePirate());
+
+        crew.push(
+
+            generatePirate()
+
+        );
+
 
     }
 
 
     return crew;
 
+
 }
+
+
 
 
 
@@ -101,35 +127,54 @@ function generateCrew(amount){
 
 let game = JSON.parse(
 
-    localStorage.getItem("emporiumExpedition")
+localStorage.getItem("emporiumExpedition")
 
-) || {
+)
 
-
-    gold: 500,
-
-
-    ship: {
-
-        name: "Rusty Sloop",
-
-        level: 1,
-
-        bonus: 1
-
-    },
+|| {
 
 
-    crew: generateCrew(3),
+gold:500,
 
 
-    expedition: null,
+ship:{
+
+    name:"Rusty Sloop",
+
+    level:1,
+
+    bonus:1
+
+},
 
 
-    loot: []
+
+crew:generateCrew(3),
+
+
+
+inventory:{
+
+
+    supplies:0,
+
+    compass:0,
+
+    crowns:0
+
+
+},
+
+
+
+expedition:null,
+
+
+loot:[]
 
 
 };
+
 
 
 
@@ -140,20 +185,62 @@ let game = JSON.parse(
 
 function saveGame(){
 
-    localStorage.setItem(
 
-        "emporiumExpedition",
+localStorage.setItem(
 
-        JSON.stringify(game)
+"emporiumExpedition",
 
-    );
+JSON.stringify(game)
+
+);
+
 
 }
 
 
 
+
+
 // =====================
-// UPDATE DISPLAY
+// CREW MOOD
+// =====================
+
+function getMood(morale){
+
+
+if(morale >= 75){
+
+    return "😊 Happy";
+
+}
+
+
+if(morale >= 40){
+
+    return "😐 Tired";
+
+}
+
+
+if(morale >= 15){
+
+    return "😡 Angry";
+
+}
+
+
+return "☠️ Furious";
+
+
+}
+
+
+
+
+
+
+// =====================
+// DISPLAY
 // =====================
 
 function updateGame(){
@@ -168,9 +255,12 @@ document.getElementById("stats").innerHTML = `
 
 
 
+
+
 document.getElementById("ship").innerHTML = `
 
-🚢 Ship: ${game.ship.name}
+
+🚢 ${game.ship.name}
 
 <br>
 
@@ -180,12 +270,17 @@ document.getElementById("ship").innerHTML = `
 
 ⚓ Loot Bonus: x${game.ship.bonus}
 
+
 `;
 
 
 
 
+
+
+
 document.getElementById("crew").innerHTML =
+
 
 game.crew.map(pirate => `
 
@@ -193,9 +288,8 @@ game.crew.map(pirate => `
 <div class="crewMember">
 
 
-🏴‍☠️ ${pirate.name}
+<h3>🏴‍☠️ ${pirate.name}</h3>
 
-<br>
 
 ⚔️ Combat: ${pirate.combat}
 
@@ -207,11 +301,45 @@ game.crew.map(pirate => `
 
 🧭 Navigation: ${pirate.navigation}
 
+<br><br>
+
+
+${getMood(pirate.morale)}
+
+<br>
+
+❤️ Morale: ${pirate.morale}/100
+
 
 </div>
 
 
+
 `).join("");
+
+
+
+
+
+
+
+document.getElementById("inventory").innerHTML = `
+
+
+📦 Supplies: ${game.inventory.supplies}
+
+<br>
+
+🧭 Compasses: ${game.inventory.compass}
+
+<br>
+
+👑 Crowns: ${game.inventory.crowns}
+
+
+`;
+
+
 
 
 
@@ -230,7 +358,9 @@ let time = Math.floor(
 
 if(time <= 0){
 
+
 completeExpedition();
+
 
 }
 
@@ -239,15 +369,19 @@ else{
 
 document.getElementById("mission").innerHTML = `
 
+
 🗺️ ${game.expedition.name}
 
 <br>
 
 ⏳ Returning in ${time}s
 
+
 `;
 
+
 }
+
 
 
 }
@@ -266,7 +400,10 @@ document.getElementById("mission").innerHTML =
 
 
 
+
+
 document.getElementById("loot").innerHTML =
+
 
 game.loot.length
 
@@ -285,24 +422,54 @@ game.loot.join("<br>")
 
 
 
+
+
+
+
 // =====================
-// SEND CREW
+// START EXPEDITION
 // =====================
 
 document.getElementById("sendCrew").onclick = ()=>{
 
 
+
 if(game.expedition){
+
 
 alert("Crew is already away!");
 
 return;
 
+
 }
 
 
 
-let missions = [
+
+
+game.crew.forEach(pirate=>{
+
+
+pirate.morale -= 10;
+
+
+
+if(pirate.morale < 0){
+
+pirate.morale = 0;
+
+}
+
+
+});
+
+
+
+
+
+let missions=[
+
 
 "Explore Lost Island",
 
@@ -314,17 +481,24 @@ let missions = [
 
 "Scout Unknown Waters"
 
+
 ];
 
 
 
-game.expedition = {
 
-name: randomFrom(missions),
 
-end: Date.now()+30000
+game.expedition={
+
+
+name:randomFrom(missions),
+
+
+end:Date.now()+30000
+
 
 };
+
 
 
 
@@ -333,16 +507,42 @@ saveGame();
 updateGame();
 
 
+
 };
 
 
 
 
+
+
+
+
 // =====================
-// FINISH MISSION
+// FINISH EXPEDITION
 // =====================
 
 function completeExpedition(){
+
+
+
+let averageMorale = 0;
+
+
+
+game.crew.forEach(pirate=>{
+
+
+averageMorale += pirate.morale;
+
+
+});
+
+
+
+averageMorale /= game.crew.length;
+
+
+
 
 
 let gold =
@@ -351,11 +551,34 @@ Math.floor(Math.random()*400)+100;
 
 
 
+
+
+if(averageMorale < 40){
+
+
+gold *= .5;
+
+
+game.loot.unshift(
+
+"😡 Crew was unhappy and worked slower"
+
+);
+
+
+}
+
+
+
+
+
 gold *= game.ship.bonus;
 
 
 
 game.gold += Math.floor(gold);
+
+
 
 
 
@@ -368,14 +591,6 @@ game.loot.unshift(
 
 
 
-let luck = 0;
-
-
-game.crew.forEach(pirate=>{
-
-luck += pirate.luck;
-
-});
 
 
 
@@ -383,36 +598,49 @@ let roll = Math.random();
 
 
 
-if(roll < (0.05 + luck/500)){
+
+
+if(roll < .05){
+
+
+game.inventory.crowns++;
 
 
 game.loot.unshift(
 
-"🌟 LEGENDARY: Kraken Crown"
+"👑 Legendary Crown Found!"
 
 );
 
 
 }
 
-else if(roll < (0.25 + luck/300)){
+
+else if(roll < .25){
+
+
+game.inventory.compass++;
 
 
 game.loot.unshift(
 
-"✨ Rare: Golden Compass"
+"🧭 Rare Compass Found!"
 
 );
 
 
 }
+
 
 else{
 
 
+game.inventory.supplies++;
+
+
 game.loot.unshift(
 
-"📦 Common Supplies"
+"📦 Supplies Found"
 
 );
 
@@ -422,7 +650,11 @@ game.loot.unshift(
 
 
 
-game.expedition = null;
+
+
+
+game.expedition=null;
+
 
 
 saveGame();
@@ -435,31 +667,49 @@ updateGame();
 
 
 
+
+
+
+
+
 // =====================
-// CUSTOM SHIP NAME
+// REST AT ISLAND
 // =====================
 
-let shipButton = document.getElementById("renameShip");
+let islandButton = document.getElementById("mainIsland");
 
 
-if(shipButton){
+if(islandButton){
 
 
-shipButton.onclick = ()=>{
+
+islandButton.onclick=()=>{
 
 
-let name = prompt(
+game.crew.forEach(pirate=>{
 
-"Enter your ship name:"
+
+pirate.morale += 25;
+
+
+
+if(pirate.morale > 100){
+
+pirate.morale = 100;
+
+}
+
+
+});
+
+
+
+game.loot.unshift(
+
+"🏝️ Crew rested at Main Island"
 
 );
 
-
-
-if(name && name.trim() !== ""){
-
-
-game.ship.name = name.trim();
 
 
 saveGame();
@@ -467,7 +717,13 @@ saveGame();
 updateGame();
 
 
-}
+
+alert(
+
+"Your crew feels refreshed!"
+
+);
+
 
 
 };
@@ -478,17 +734,70 @@ updateGame();
 
 
 
+
+
+
+
 // =====================
-// SHIP UPGRADE
+// RENAME SHIP
+// =====================
+
+let renameButton = document.getElementById("renameShip");
+
+
+if(renameButton){
+
+
+renameButton.onclick=()=>{
+
+
+let name = prompt(
+
+"Enter ship name:"
+
+);
+
+
+
+if(name){
+
+
+game.ship.name=name;
+
+
+saveGame();
+
+updateGame();
+
+
+}
+
+
+
+};
+
+
+
+}
+
+
+
+
+
+
+
+// =====================
+// UPGRADE SHIP
 // =====================
 
 let upgradeButton = document.getElementById("upgradeShip");
 
 
+
 if(upgradeButton){
 
 
-upgradeButton.onclick = ()=>{
+upgradeButton.onclick=()=>{
 
 
 let cost = game.ship.level * 500;
@@ -497,9 +806,11 @@ let cost = game.ship.level * 500;
 
 if(game.gold < cost){
 
+
 alert("Not enough gold!");
 
 return;
+
 
 }
 
@@ -508,10 +819,11 @@ return;
 game.gold -= cost;
 
 
+
 game.ship.level++;
 
 
-game.ship.bonus += 0.5;
+game.ship.bonus += .5;
 
 
 
@@ -520,10 +832,15 @@ saveGame();
 updateGame();
 
 
+
 };
 
 
+
 }
+
+
+
 
 
 
