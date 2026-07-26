@@ -1323,7 +1323,40 @@ updateGame();
 
 
 
+// =====================
+// DEBUG SAVE RESET
+// =====================
 
+document.addEventListener("keydown", (event)=>{
+
+    if(
+        event.ctrlKey &&
+        event.altKey &&
+        event.key.toLowerCase() === "d"
+    ){
+
+        let warning = confirm(
+            "⚠️ WARNING ⚠️\n\n" +
+            "This will delete your pirate save data!\n\n" +
+            "Are you sure you want to reset?"
+        );
+
+
+        if(warning){
+
+            localStorage.removeItem("emporiumExpedition");
+
+            alert(
+                "🏴‍☠️ Save deleted!\nReloading the Emporium..."
+            );
+
+            location.reload();
+
+        }
+
+    }
+
+});
 
 
 
