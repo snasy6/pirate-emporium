@@ -389,7 +389,6 @@ ship:{
 },
 
 
-
 crew:generateCrew(3),
 
 
@@ -442,13 +441,54 @@ inventory:{
 expedition:null,
 
 
-loot:[]
-
+loot:[],
+market:{
+    rum:1,
+    coconuts:1,
+    driedFish:1,
+    bananas:1,
+    wood:1,
+    rope:1,
+    shipParts:1,
+    silverRing:1,
+    exoticHoney:1,
+    rubies:1,
+    sapphire:1,
+    pearl:1,
+    treasureMaps:1,
+    ancientArtifact:1,
+    goldenIdol:1,
+    krakenPearl:1,
+    ghostBlade:1
+}
 
 };
 
 
 
+if(!game.market){
+
+    game.market = {
+        rum:1,
+        coconuts:1,
+        driedFish:1,
+        bananas:1,
+        wood:1,
+        rope:1,
+        shipParts:1,
+        silverRing:1,
+        exoticHoney:1,
+        rubies:1,
+        sapphire:1,
+        pearl:1,
+        treasureMaps:1,
+        ancientArtifact:1,
+        goldenIdol:1,
+        krakenPearl:1,
+        ghostBlade:1
+    };
+
+}
 
 
 // =====================
@@ -468,7 +508,27 @@ JSON.stringify(game)
 
 
 }
+function updateMarket(){
 
+    for(let item in game.market){
+
+        let change = (Math.random() * 0.4) - 0.2;
+
+        game.market[item] += change;
+
+
+        if(game.market[item] < 0.5){
+            game.market[item] = 0.5;
+        }
+
+
+        if(game.market[item] > 2){
+            game.market[item] = 2;
+        }
+
+    }
+
+}
 // =====================
 // SELL ITEM
 // =====================
@@ -484,8 +544,7 @@ function sellItem(item){
 
 
     let price =
-    items[item].price * market[item];
-
+    items[item].price * game.market[item];
 
     game.inventory[item]--;
 
@@ -714,31 +773,23 @@ document.getElementById("market").innerHTML = `
 
 <br><br>
 
-🍺 Rum: ${Math.floor(items.rum.price * market.rum)} gold
+${Object.keys(items).map(item => `
 
-<button onclick="sellItem('rum')">
-Sell
-</button>
+${items[item].name}
 
 <br>
 
-🥥 Coconuts: ${Math.floor(items.coconuts.price * market.coconuts)} gold
-
-<button onclick="sellItem('coconuts')">
-Sell
-</button>
+🏷️ Price: ${Math.floor(items[item].price * game.market[item])} gold
 
 <br>
 
-💎 Rubies: ${Math.floor(items.rubies.price * market.rubies)} gold
-
-<button onclick="sellItem('rubies')">
+<button onclick="sellItem('${item}')">
 Sell
 </button>
 
-`;
+<br><br>
 
-
+`).join("")}
 
 
 if(game.expedition){
@@ -1115,6 +1166,7 @@ else{
     );
 
 }
+updateMarket();
 game.expedition = null;
 
 saveGame();
@@ -1123,46 +1175,7 @@ updateGame();
 
 }
 
-// =====================
-// SELL ITEMS
-// =====================
 
-function sellItem(item){
-
-
-    if(game.inventory[item] <= 0){
-
-        alert("You don't have any " + items[item].name);
-
-        return;
-
-    }
-
-
-    let price = Math.floor(
-        items[item].price * market[item]
-    );
-
-
-    game.inventory[item]--;
-
-
-    game.gold += price;
-
-
-    game.loot.unshift(
-
-        `💰 Sold ${items[item].name} for ${price} gold`
-
-    );
-
-
-    saveGame();
-
-    updateGame();
-
-
-}
 
 // =====================
 // REST AT ISLAND
