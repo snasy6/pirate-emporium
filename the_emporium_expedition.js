@@ -365,7 +365,7 @@ ship:{
 },
 
 
-crew:generateCrew(3),
+crew:generateCrew(1),
 
 
 inventory:{
@@ -646,9 +646,7 @@ ${getMood(pirate.morale ?? 100)}
 
 <br>
 
-❤️ Morale: ${pirate.morale ?? 100}/100
-
-
+❤️ Morale: ${Math.floor(pirate.morale ?? 100)}/100
 </div>
 
 
@@ -896,7 +894,6 @@ pirate.morale = 0;
 
 
 
-
 let missions=[
 
 {
@@ -1015,7 +1012,10 @@ game.loot.unshift(
 
 
 
+let crewBonus = 1 + ((game.crew.length - 1) * 0.1);
+
 gold *= game.ship.bonus;
+gold *= crewBonus;
 
 
 
