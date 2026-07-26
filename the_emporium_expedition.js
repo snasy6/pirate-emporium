@@ -1,7 +1,7 @@
 // 🏴‍☠️ The Emporium Expedition
 // Development Build
 
-alert("");
+alert("js");
 function randomFrom(array){
 
     return array[
