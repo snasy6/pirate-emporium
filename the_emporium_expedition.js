@@ -227,30 +227,6 @@ const items = {
 
 };
 
-const market = {
-
-    rum: 1,
-    coconuts: 1,
-    driedFish: 1,
-    bananas: 1,
-    wood: 1,
-    rope: 1,
-
-    shipParts: 1,
-    silverRing: 1,
-    exoticHoney: 1,
-
-    rubies: 1,
-    sapphire: 1,
-    pearl: 1,
-    treasureMaps: 1,
-    ancientArtifact: 1,
-
-    goldenIdol: 1,
-    krakenPearl: 1,
-    ghostBlade: 1
-
-};
 
 
 // =====================
