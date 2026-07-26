@@ -10,6 +10,232 @@ function randomFrom(array){
 
 }
 
+// =====================
+// ITEM DATABASE
+// =====================
+
+const items = {
+
+
+    // COMMON CARGO
+
+    rum:{
+
+        name:"🍺 Rum",
+
+        rarity:"Common",
+
+        price:20
+
+    },
+
+
+    coconuts:{
+
+        name:"🥥 Coconuts",
+
+        rarity:"Common",
+
+        price:5
+
+    },
+
+
+    driedFish:{
+
+        name:"🐟 Dried Fish",
+
+        rarity:"Common",
+
+        price:10
+
+    },
+
+
+    bananas:{
+
+        name:"🍌 Bananas",
+
+        rarity:"Common",
+
+        price:8
+
+    },
+
+
+    wood:{
+
+        name:"🪵 Wood Planks",
+
+        rarity:"Common",
+
+        price:15
+
+    },
+
+
+    rope:{
+
+        name:"🧵 Rope",
+
+        rarity:"Common",
+
+        price:12
+
+    },
+
+
+
+    // UNCOMMON
+
+
+    shipParts:{
+
+        name:"⚓ Ship Parts",
+
+        rarity:"Uncommon",
+
+        price:150
+
+    },
+
+
+    oldCompass:{
+
+        name:"🧭 Old Compass",
+
+        rarity:"Uncommon",
+
+        price:200
+
+    },
+
+
+    silverRing:{
+
+        name:"💍 Silver Ring",
+
+        rarity:"Uncommon",
+
+        price:100
+
+    },
+
+
+    exoticHoney:{
+
+        name:"🍯 Island Honey",
+
+        rarity:"Uncommon",
+
+        price:75
+
+    },
+
+
+
+    // RARE
+
+
+    rubies:{
+
+        name:"💎 Ruby",
+
+        rarity:"Rare",
+
+        price:500
+
+    },
+
+
+    sapphire:{
+
+        name:"💎 Sapphire",
+
+        rarity:"Rare",
+
+        price:700
+
+    },
+
+
+    pearl:{
+
+        name:"🦪 Pearl",
+
+        rarity:"Rare",
+
+        price:600
+
+    },
+
+
+    treasureMaps:{
+
+        name:"📜 Treasure Map",
+
+        rarity:"Rare",
+
+        price:1000
+
+    },
+
+
+    ancientArtifact:{
+
+        name:"🏺 Ancient Artifact",
+
+        rarity:"Rare",
+
+        price:1500
+
+    },
+
+
+
+    // LEGENDARY
+
+
+    goldenIdol:{
+
+        name:"👑 Golden Idol",
+
+        rarity:"Legendary",
+
+        price:3000
+
+    },
+
+
+    krakenPearl:{
+
+        name:"🐙 Kraken Pearl",
+
+        rarity:"Legendary",
+
+        price:5000
+
+    },
+
+
+    
+
+  
+
+
+    ghostBlade:{
+
+        name:"⚔️ Ghost Captain's Blade",
+
+        rarity:"Legendary",
+
+        price:7500
+
+    }
+
+
+};
+
 
 
 // =====================
@@ -152,23 +378,50 @@ ship:{
 crew:generateCrew(3),
 
 
-
 inventory:{
 
     rum:0,
 
     coconuts:0,
 
-    rubies:0,
+    driedFish:0,
 
-    treasureMaps:0,
+    bananas:0,
+
+    wood:0,
+
+    rope:0,
+
 
     shipParts:0,
 
-    parrots:0
+    
 
-}
+    silverRing:0,
 
+    exoticHoney:0,
+
+
+    rubies:0,
+
+    sapphire:0,
+
+    pearl:0,
+
+    treasureMaps:0,
+
+    ancientArtifact:0,
+
+
+    goldenIdol:0,
+
+    krakenPearl:0,
+
+   
+
+    ghostBlade:0
+
+},
 
 
 expedition:null,
@@ -329,20 +582,85 @@ ${getMood(pirate.morale)}
 
 document.getElementById("inventory").innerHTML = `
 
+🎒 Cargo Hold
 
-📦 Supplies: ${game.inventory.supplies}
+<br><br>
+
+🍺 Rum: ${game.inventory.rum}
 
 <br>
 
-🧭 Compasses: ${game.inventory.compass}
+🥥 Coconuts: ${game.inventory.coconuts}
 
 <br>
 
-👑 Crowns: ${game.inventory.crowns}
+🐟 Dried Fish: ${game.inventory.driedFish}
 
+<br>
+
+🍌 Bananas: ${game.inventory.bananas}
+
+<br>
+
+🪵 Wood: ${game.inventory.wood}
+
+<br>
+
+🧵 Rope: ${game.inventory.rope}
+
+<br>
+
+⚓ Ship Parts: ${game.inventory.shipParts}
+
+<br>
+
+
+
+<br>
+
+💍 Silver Ring: ${game.inventory.silverRing}
+
+<br>
+
+🍯 Island Honey: ${game.inventory.exoticHoney}
+
+<br>
+
+💎 Rubies: ${game.inventory.rubies}
+
+<br>
+
+💎 Sapphire: ${game.inventory.sapphire}
+
+<br>
+
+🦪 Pearls: ${game.inventory.pearl}
+
+<br>
+
+📜 Treasure Maps: ${game.inventory.treasureMaps}
+
+<br>
+
+🏺 Ancient Artifacts: ${game.inventory.ancientArtifact}
+
+<br>
+
+👑 Golden Idols: ${game.inventory.goldenIdol}
+
+<br>
+
+🐙 Kraken Pearls: ${game.inventory.krakenPearl}
+
+<br>
+
+
+
+<br>
+
+⚔️ Ghost Blades: ${game.inventory.ghostBlade}
 
 `;
-
 
 
 
@@ -606,53 +924,35 @@ let roll = Math.random();
 
 if(roll < .05){
 
+    game.inventory.goldenIdol++;
 
-game.inventory.crowns++;
-
-
-game.loot.unshift(
-
-"👑 Legendary Crown Found!"
-
-);
-
+    game.loot.unshift(
+        "👑 Golden Idol Found!"
+    );
 
 }
 
 
 else if(roll < .25){
 
+    game.inventory.treasureMaps++;
 
-game.inventory.compass++;
-
-
-game.loot.unshift(
-
-"🧭 Rare Compass Found!"
-
-);
-
+    game.loot.unshift(
+        "📜 Treasure Map Found!"
+    );
 
 }
 
 
 else{
 
+    game.inventory.rum++;
 
-game.inventory.supplies++;
-
-
-game.loot.unshift(
-
-"📦 Supplies Found"
-
-);
-
+    game.loot.unshift(
+        "🍺 Rum Barrel Found!"
+    );
 
 }
-
-
-
 
 
 
