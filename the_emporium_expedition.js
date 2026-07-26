@@ -155,15 +155,19 @@ crew:generateCrew(3),
 
 inventory:{
 
+    rum:0,
 
-    supplies:0,
+    coconuts:0,
 
-    compass:0,
+    rubies:0,
 
-    crowns:0
+    treasureMaps:0,
 
+    shipParts:0,
 
-},
+    parrots:0
+
+}
 
 
 
