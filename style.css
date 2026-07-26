@@ -155,3 +155,79 @@ repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 
 }
+/* 🏴‍☠️ The Emporium Expedition */
+
+#stats,
+#ship,
+#mission,
+#loot {
+
+    background: rgba(0,0,0,0.25);
+
+    border: 2px solid #c79b46;
+
+    padding: 15px;
+
+    margin: 10px 0;
+
+    border-radius: 10px;
+
+}
+
+
+
+#sendCrew,
+#upgradeShip {
+
+    background: #5b3a1e;
+
+    color: white;
+
+    border: 2px solid #c79b46;
+
+    padding: 12px 20px;
+
+    font-size: 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+
+
+
+#sendCrew:hover,
+#upgradeShip:hover {
+
+    transform: scale(1.05);
+
+}
+
+
+
+#loot {
+
+    max-height: 250px;
+
+    overflow-y: auto;
+
+}
+
+
+
+.expeditionItem {
+
+    padding: 8px;
+
+    border-bottom: 1px solid #c79b46;
+
+}
+
+
+
+h1 {
+
+    text-shadow: 2px 2px black;
+
+}
