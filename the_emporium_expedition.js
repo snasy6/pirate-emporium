@@ -791,6 +791,7 @@ Sell
 
 `).join("")}
 
+`;
 
 if(game.expedition){
 
