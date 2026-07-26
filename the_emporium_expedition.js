@@ -100,16 +100,7 @@ const items = {
     },
 
 
-    oldCompass:{
-
-        name:"🧭 Old Compass",
-
-        rarity:"Uncommon",
-
-        price:200
-
-    },
-
+    
 
     silverRing:{
 
@@ -236,6 +227,30 @@ const items = {
 
 };
 
+const market = {
+
+    rum: 1,
+    coconuts: 1,
+    driedFish: 1,
+    bananas: 1,
+    wood: 1,
+    rope: 1,
+
+    shipParts: 1,
+    silverRing: 1,
+    exoticHoney: 1,
+
+    rubies: 1,
+    sapphire: 1,
+    pearl: 1,
+    treasureMaps: 1,
+    ancientArtifact: 1,
+
+    goldenIdol: 1,
+    krakenPearl: 1,
+    ghostBlade: 1
+
+};
 
 
 // =====================
@@ -454,7 +469,38 @@ JSON.stringify(game)
 
 }
 
+// =====================
+// SELL ITEM
+// =====================
 
+function sellItem(item){
+
+    if(game.inventory[item] <= 0){
+
+        alert("You don't have any!");
+        return;
+
+    }
+
+
+    let price =
+    items[item].price * market[item];
+
+
+    game.inventory[item]--;
+
+    game.gold += Math.floor(price);
+
+
+    game.loot.unshift(
+        `💰 Sold ${items[item].name} for ${Math.floor(price)} gold`
+    );
+
+
+    saveGame();
+    updateGame();
+
+}
 
 
 
@@ -662,7 +708,35 @@ document.getElementById("inventory").innerHTML = `
 
 `;
 
+document.getElementById("market").innerHTML = `
 
+🏝️ Island Market
+
+<br><br>
+
+🍺 Rum: ${Math.floor(items.rum.price * market.rum)} gold
+
+<button onclick="sellItem('rum')">
+Sell
+</button>
+
+<br>
+
+🥥 Coconuts: ${Math.floor(items.coconuts.price * market.coconuts)} gold
+
+<button onclick="sellItem('coconuts')">
+Sell
+</button>
+
+<br>
+
+💎 Rubies: ${Math.floor(items.rubies.price * market.rubies)} gold
+
+<button onclick="sellItem('rubies')">
+Sell
+</button>
+
+`;
 
 
 
@@ -792,32 +866,46 @@ pirate.morale = 0;
 
 let missions=[
 
+{
+    name:"🏝️ Explore Lost Island",
+    type:"island"
+},
 
-"Explore Lost Island",
+{
+    name:"🚢 Raid Merchant Ship",
+    type:"merchant"
+},
 
-"Raid Merchant Ship",
+{
+    name:"🏚️ Search Ancient Ruins",
+    type:"ruins"
+},
 
-"Search Ancient Ruins",
+{
+    name:"⛏️ Find Buried Treasure",
+    type:"treasure"
+},
 
-"Find Buried Treasure",
-
-"Scout Unknown Waters"
-
+{
+    name:"🌊 Scout Unknown Waters",
+    type:"ocean"
+}
 
 ];
 
 
 
 
+let mission = randomFrom(missions);
+
 
 game.expedition={
 
+name:mission.name,
 
-name:randomFrom(missions),
-
+type:mission.type,
 
 end:Date.now()+30000
-
 
 };
 
@@ -919,10 +1007,31 @@ game.loot.unshift(
 let roll = Math.random();
 
 
+// LEGENDARY LOOT
+
+if(roll < 0.01){
+
+    game.inventory.ghostBlade++;
+
+    game.loot.unshift(
+        "⚔️ Ghost Captain's Blade Found!"
+    );
+
+}
 
 
+else if(roll < 0.03){
 
-if(roll < .05){
+    game.inventory.krakenPearl++;
+
+    game.loot.unshift(
+        "🐙 Kraken Pearl Found!"
+    );
+
+}
+
+
+else if(roll < 0.08){
 
     game.inventory.goldenIdol++;
 
@@ -933,12 +1042,60 @@ if(roll < .05){
 }
 
 
-else if(roll < .25){
+// RARE LOOT
+
+else if(roll < 0.25){
 
     game.inventory.treasureMaps++;
 
     game.loot.unshift(
         "📜 Treasure Map Found!"
+    );
+
+}
+
+
+else if(roll < 0.35){
+
+    game.inventory.rubies++;
+
+    game.loot.unshift(
+        "💎 Ruby Found!"
+    );
+
+}
+
+
+else if(roll < 0.45){
+
+    game.inventory.pearl++;
+
+    game.loot.unshift(
+        "🦪 Pearl Found!"
+    );
+
+}
+
+
+// COMMON LOOT
+
+else if(roll < 0.65){
+
+    game.inventory.shipParts++;
+
+    game.loot.unshift(
+        "⚓ Ship Parts Found!"
+    );
+
+}
+
+
+else if(roll < 0.80){
+
+    game.inventory.coconuts++;
+
+    game.loot.unshift(
+        "🥥 Coconuts Found!"
     );
 
 }
@@ -953,28 +1110,54 @@ else{
     );
 
 }
-
-
-
-
-game.expedition=null;
-
-
+game.expedition = null;
 
 saveGame();
 
 updateGame();
 
-
 }
 
+// =====================
+// SELL ITEMS
+// =====================
+
+function sellItem(item){
 
 
+    if(game.inventory[item] <= 0){
+
+        alert("You don't have any " + items[item].name);
+
+        return;
+
+    }
 
 
+    let price = Math.floor(
+        items[item].price * market[item]
+    );
 
 
+    game.inventory[item]--;
 
+
+    game.gold += price;
+
+
+    game.loot.unshift(
+
+        `💰 Sold ${items[item].name} for ${price} gold`
+
+    );
+
+
+    saveGame();
+
+    updateGame();
+
+
+}
 
 // =====================
 // REST AT ISLAND
