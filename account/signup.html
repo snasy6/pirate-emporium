@@ -3,46 +3,106 @@
 
 <head>
 
-<title>Create Pirate Account</title>
+    <title>Create Account - Bances Pirate Emporium</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 
 <body>
 
+    <div class="board">
 
-<div class="board">
+        <h1>🏴‍☠️ Bances Pirate Emporium 🏴‍☠️</h1>
 
-<h1>🏴‍☠️ Join the Crew</h1>
-
-
-<input id="username" placeholder="Pirate Username">
+        <h2>🏴 Create Pirate Account</h2>
 
 
-<input id="email" placeholder="Email">
+        <div class="account-form">
+
+            <label for="username">
+                Pirate Name
+            </label>
+
+            <br>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Choose your pirate name"
+                autocomplete="username"
+            >
+
+            <br><br>
 
 
-<input id="password" type="password" placeholder="Password">
+            <label for="email">
+                Email
+            </label>
+
+            <br>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+            >
+
+            <br><br>
 
 
-<button id="signupButton">
-Create Account
-</button>
+            <label for="password">
+                Password
+            </label>
+
+            <br>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Choose a password"
+                autocomplete="new-password"
+            >
+
+            <br><br>
 
 
-<p>
-Already a pirate?
-<a href="login.html">Login</a>
-</p>
+            <button id="signupButton">
+                🏴‍☠️ Create Account
+            </button>
+
+        </div>
 
 
-</div>
+        <br>
 
 
-<script type="module" src="auth.js"></script>
+        <p>
+            Already have an account?
+            <a href="login.html">
+                🔑 Login
+            </a>
+        </p>
 
+
+        <p>
+            <a href="index.html">
+                🏠 Back to Emporium
+            </a>
+        </p>
+
+
+        <p id="signupMessage"></p>
+
+    </div>
+
+
+    <script
+        type="module"
+        src="auth.js">
+    </script>
 
 </body>
 
