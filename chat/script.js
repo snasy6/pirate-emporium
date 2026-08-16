@@ -245,9 +245,9 @@ postButton.onclick = async()=>{
 
 const emotes = {
 
-    pirate: "pirate.gif",
+    pirate: "../pirate.gif",
 
-    mad: "my_fucking_crew.jpg"
+    mad: "../my_fucking_crew.jpg"
 
 };
 
