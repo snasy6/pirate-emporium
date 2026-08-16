@@ -1,4 +1,4 @@
-```javascript
+javascript
 const canvas = document.getElementById("chaosBackground");
 const ctx = canvas.getContext("2d");
 
